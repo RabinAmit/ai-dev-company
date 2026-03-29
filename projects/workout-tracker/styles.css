@@ -1,0 +1,152 @@
+:root {
+  color-scheme: light;
+  --background: #f4f1ea;
+  --surface: #fffdf9;
+  --surface-border: #d9d0c1;
+  --text: #2e2a24;
+  --muted: #6f665c;
+  --accent: #2f6f5e;
+  --accent-hover: #255a4d;
+  --error: #b24343;
+  --success: #2f6f5e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: linear-gradient(180deg, #efe8db 0%, var(--background) 100%);
+  color: var(--text);
+}
+
+.app {
+  width: min(720px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.app-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.subtitle,
+.section-note {
+  color: var(--muted);
+  margin: 0;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 10px 24px rgba(55, 43, 28, 0.08);
+  margin-bottom: 1rem;
+}
+
+.workout-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--surface-border);
+  border-radius: 10px;
+  background: #fff;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--accent-hover);
+}
+
+.form-message {
+  min-height: 1.25rem;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.form-message.error {
+  color: var(--error);
+}
+
+.form-message.success {
+  color: var(--success);
+}
+
+.section-heading {
+  margin-bottom: 1rem;
+}
+
+.empty-state {
+  color: var(--muted);
+}
+
+.workout-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.workout-item {
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.workout-item h3 {
+  margin: 0 0 0.5rem;
+}
+
+.workout-meta,
+.workout-notes {
+  margin: 0.25rem 0;
+  color: var(--muted);
+}
+
+@media (max-width: 600px) {
+  .app {
+    width: min(100% - 1rem, 720px);
+    padding-top: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
