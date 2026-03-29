@@ -69,6 +69,43 @@ Never skip stages.
 
 ---
 
+## Workflow Enforcement Rules
+
+The Orchestrator MUST enforce the workflow defined in `/workflows/stage-transitions.md`.
+
+---
+
+### QA Enforcement (STRICT)
+
+- If QA Status = FAIL:
+  - Task MUST be routed back to Developer
+  - QA Report MUST be included
+  - System MUST NOT proceed forward
+
+- Developer MUST:
+  - Address ALL reported issues
+  - Provide a fix summary
+  - Resubmit for QA
+
+- Partial fixes are NOT allowed
+
+---
+
+### Completion Rule
+
+A task can be marked as DONE only if:
+- QA Status = PASS  
+OR  
+- Human explicitly approves unresolved issues
+
+---
+
+### Human Override Handling
+
+If human approves issues:
+- Mark them as "Accepted Issues"
+- Allow task to proceed to DONE
+
 ## Decision Classification (MANDATORY STEP)
 
 Before any action, explicitly classify:
