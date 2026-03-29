@@ -1,0 +1,233 @@
+:root {
+  --bg: #f4efe7;
+  --surface: #fffaf2;
+  --surface-strong: #fffdf8;
+  --ink: #1f1a17;
+  --muted: #6b6259;
+  --accent: #b85c38;
+  --accent-dark: #8e4529;
+  --border: #dfd2c2;
+  --danger: #a63d40;
+  --danger-dark: #7e2b2e;
+  --shadow: 0 18px 45px rgba(61, 38, 24, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(184, 92, 56, 0.14), transparent 28%),
+    linear-gradient(180deg, #f7f1e7 0%, #efe5d7 100%);
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(960px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.panel {
+  background: rgba(255, 250, 242, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.panel + .panel {
+  margin-top: 1rem;
+}
+
+.hero-panel h1,
+.section-heading h2 {
+  margin: 0;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--accent-dark);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-copy,
+.section-heading p,
+.form-message,
+.workout-meta {
+  color: var(--muted);
+}
+
+.section-heading {
+  margin-bottom: 1rem;
+}
+
+#workout-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+label {
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-strong);
+  padding: 0.8rem 0.9rem;
+}
+
+input:focus {
+  outline: 2px solid rgba(184, 92, 56, 0.25);
+  border-color: var(--accent);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.field-group {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 120ms ease, background 120ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button[type="submit"] {
+  background: var(--accent);
+  color: #fffaf6;
+}
+
+button[type="submit"]:hover {
+  background: var(--accent-dark);
+}
+
+button.secondary {
+  background: #eadbcc;
+  color: var(--ink);
+}
+
+button.edit-button {
+  background: #eadbcc;
+  color: var(--ink);
+}
+
+button.delete-button {
+  background: var(--danger);
+  color: white;
+}
+
+button.delete-button:hover {
+  background: var(--danger-dark);
+}
+
+.form-message {
+  min-height: 1.2rem;
+  margin: 0;
+}
+
+.empty-state {
+  border: 1px dashed var(--border);
+  border-radius: 18px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.workout-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.workout-item {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1rem;
+  background: var(--surface-strong);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.workout-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+}
+
+.workout-title {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.workout-stats {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.workout-stat {
+  background: #f0e3d2;
+  border-radius: 999px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+.workout-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: min(100% - 1rem, 960px);
+    padding-top: 1rem;
+  }
+
+  .panel {
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  .field-row,
+  .workout-header {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+}
