@@ -57,12 +57,27 @@ If unclear → ask before proceeding (Tier 2)
 
 Use this logic:
 
+## Routing Rules (Explicit)
+
+Use this logic:
+
 - Undefined product → PM
-- Defined product, no structure → Architect
+
+- PM complete → Critic (PM Review)
+- PM approved → UI/UX
+
+- UI/UX complete → Critic (UX Review)
+- UI/UX approved → Architect
+
+- Architect complete → Critic (Architecture Review)
+- Architecture approved → Developer
+
 - Defined architecture → Developer
 - Completed implementation → QA
+
 - QA passed → Done
 - QA failed → Developer
+
 - Structural issue → Architect
 
 Never skip stages.
