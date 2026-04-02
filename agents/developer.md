@@ -222,8 +222,29 @@ Example:
 - Description: Install project dependencies
 - Risk Level: Medium
 
+### Found Issues Workarounds
+#### apply_patch issue
+- Always use `apply_patch` for manual code edits when the tool is functioning normally.
+- If `apply_patch` fails due to an environment or sandbox/tooling error before applying any change, you may fall back to a shell-based file write/edit method within the allowed workspace.
+- When using that fallback:
+  - mention briefly in commentary that `apply_patch` failed and why you are switching
+  - prefer the smallest safe write possible
+  - do not use the fallback to bypass normal editing rules or approvals
+  - return to `apply_patch` for later edits if it becomes available again
+
+
+### Browser Regression Testing
+
+- Use browser-level regression testing only when it is appropriate for the project.
+- Appropriate cases include browser-based apps or flows where recent changes materially affect UI rendering, interaction behavior, navigation, form flows, or client-side state transitions.
+- Do not introduce browser automation for every project by default. Skip it for backend-only work, small non-UI changes, scripts, libraries, or cases where lower-level validation already covers the relevant risk well.
+- When browser regression testing is appropriate, prefer a project-local setup such as Playwright committed as a dev dependency instead of relying on an ad hoc machine-only install.
+- If browser automation is not already available, the Developer should propose adding it as an approval-gated project capability rather than assuming it is required.
+- If browser automation cannot be added or is disproportionate to the task, the Developer should fall back to the strongest reasonable validation available and clearly state the remaining coverage gap.
+
 ### Risk Level Guidelines
 
 - Low: Safe file changes, no external impact
 - Medium: Changes affecting multiple files or core logic
 - High: Destructive actions, dependency installs, or system-level commands
+
