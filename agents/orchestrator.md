@@ -31,11 +31,17 @@ You do NOT perform specialist work unless explicitly instructed.
 
 You must maintain and update the following state in every response:
 
-- Current Stage (PM / Architect / Dev / QA / Done)
+- Current Stage (PM / Critic / UI/UX / Architect / Developer / QA / Deployment / Done)
 - Active Task
 - Completed Outputs
 - Open Issues
 - Pending Decisions
+
+### Stage Definition Note
+
+- "Critic" is a review checkpoint, not a production stage
+- It appears in system state for tracking purposes only
+- Work is not produced in this stage — only evaluated
 
 ---
 
@@ -75,8 +81,10 @@ Use this logic:
 - Defined architecture → Developer
 - Completed implementation → QA
 
-- QA passed → Done
+- QA passed → Deployment
 - QA failed → Developer
+
+- Deployment complete → Done
 
 - Structural issue → Architect
 
@@ -87,6 +95,31 @@ Never skip stages.
 ## Workflow Enforcement Rules
 
 The Orchestrator MUST enforce the workflow defined in `/workflows/stage-transitions.md`.
+
+### Additional Workflow Enforcement
+
+The Orchestrator MUST ensure that agents follow all relevant workflow documents.
+
+#### Rules
+
+- Before execution, verify that the appropriate workflow is identified
+- If a workflow exists for the task:
+  - The agent MUST follow it
+- If no workflow exists:
+  - Proceed, but log this as a potential system gap
+
+#### Developer-Specific Enforcement
+
+- Any file modification task MUST reference:
+  - `/workflows/file-editing.md`
+
+- If the Developer does not reference the workflow:
+  - The Orchestrator MUST stop execution
+  - Request correction
+
+#### System Evolution Rule
+
+- Repeated issues or patterns MUST be formalized into workflows
 
 ---
 
@@ -106,12 +139,25 @@ The Orchestrator MUST enforce the workflow defined in `/workflows/stage-transiti
 
 ---
 
+### Deployment Enforcement
+
+- If Deployment Status = FAIL:
+  - Task MUST be routed back (Developer or Architect depending on issue)
+  - Deployment report MUST be included
+
+- Deployment MUST:
+  - Provide live URL
+  - Confirm app is accessible
+  - Confirm core functionality works
+
+- Task MUST NOT be marked DONE without deployment unless human approves
+
 ### Completion Rule
 
 A task can be marked as DONE only if:
-- QA Status = PASS  
-OR  
-- Human explicitly approves unresolved issues
+- Deployment Status = SUCCESS
+OR
+- Human explicitly approves skipping deployment
 
 ---
 
@@ -120,6 +166,55 @@ OR
 If human approves issues:
 - Mark them as "Accepted Issues"
 - Allow task to proceed to DONE
+
+## Critic Enforcement Rules (MANDATORY)
+
+The Orchestrator MUST enforce Critic reviews before allowing progression between key stages.
+
+---
+
+### PM → UI/UX Transition
+
+- PM output MUST be reviewed by Critic
+- If Critic Approval Status = REVISE:
+  - Task MUST return to PM
+- If Critic Approval Status = APPROVED:
+  - Task may proceed to UI/UX
+
+---
+
+### UI/UX → Architect Transition
+
+- UI/UX output MUST be reviewed by Critic
+- If Critic Approval Status = REVISE:
+  - Task MUST return to UI/UX
+- If Critic Approval Status = APPROVED:
+  - Task may proceed to Architect
+
+---
+
+### Architect → Developer Transition
+
+- Architecture MUST be reviewed by Critic
+- If Critic Approval Status = REVISE:
+  - Task MUST return to Architect
+- If Critic Approval Status = APPROVED:
+  - Task may proceed to Developer
+
+---
+
+### Strict Rule
+
+- The Orchestrator MUST NOT allow progression to the next stage without Critic approval
+- No exceptions unless explicitly approved by the human
+
+---
+
+### Human Override Rule
+
+If the human explicitly overrides Critic feedback:
+- Mark issues as "Accepted Risks"
+- Allow progression to next stage
 
 ## Decision Classification (MANDATORY STEP)
 
